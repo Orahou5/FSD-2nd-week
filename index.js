@@ -107,7 +107,8 @@ document.querySelector("form").addEventListener("submit", (event) => {
     event.preventDefault();
     const title = event.target.querySelector("#title").value
     const priority = event.target.querySelector("#priority").value
-    addTask(title, priority)
+
+    if(!!title) addTask(title, priority)
     event.target.reset();
 })
 
