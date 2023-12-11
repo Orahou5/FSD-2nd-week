@@ -1,0 +1,19 @@
+.high {
+    color: red;
+}
+
+.normal {
+    color: blue;
+}
+
+.low {
+    color: green;
+}
+
+.unknown {
+    color: black;
+}
+
+.finished {
+    text-decoration: line-through;
+}
