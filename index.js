@@ -72,6 +72,8 @@ function deleteAllFinishedTasks(event) {
 
     finishedTasks.forEach(deleteTask)
 
+    if(finishedTasks.length === 0) return;
+
     notification(finishedTasks.length)
 }
 
