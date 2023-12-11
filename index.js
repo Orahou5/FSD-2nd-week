@@ -84,11 +84,7 @@ function notification(numberOfTasks) {
 function addTask(title, priority) {
     const ul = getUl()
 
-    const duplicateTask = getTask(title);
-    if(!!duplicateTask) deleteTask(duplicateTask);
-
     ul.append(createTask(title, priority));
-    storage.setItem(title, priority);
 }
 
 function getUl() {
@@ -108,7 +104,11 @@ document.querySelector("form").addEventListener("submit", (event) => {
     const title = event.target.querySelector("#title").value
     const priority = event.target.querySelector("#priority").value
 
-    if(!!title) addTask(title, priority)
+    if(!!title) {
+        getUl().innerHTML = "";
+        storage.setItem(title, priority);
+        createTasksFromStorage()
+    } 
     event.target.reset();
 })
 
