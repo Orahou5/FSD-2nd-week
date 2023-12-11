@@ -1,5 +1,7 @@
 const storage = window.localStorage;
 
+const listOfTasksUl = document.querySelector("ul");
+
 function createTasksFromStorage() {
     const obj = {
         1: [],
@@ -88,7 +90,7 @@ function addTask(title, priority) {
 }
 
 function getUl() {
-    return document.querySelector("ul")
+    return listOfTasksUl;
 }
 
 {
