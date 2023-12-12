@@ -1,4 +1,3 @@
-
 class Canvas {
     #canvas;
     #context;
@@ -82,6 +81,10 @@ class Canvas {
             this.thickness = e.target.value;
         });
 
+        document.querySelector("#clear").addEventListener("click", (e) => {
+            this.reset();
+        });
+
         return this;
     }
     
@@ -91,6 +94,16 @@ class Canvas {
         this.context.moveTo(this.pointer.x, this.pointer.y);
         this.context.lineTo(x, y);
         this.context.stroke();
+    }
+
+    reset() {
+        const thickness = this.thickness;
+        const color = this.color;
+        this.context.reset();
+        this.thickness = thickness;
+        this.color = color;
+        
+        return this;
     }
     
     get canvas() {
