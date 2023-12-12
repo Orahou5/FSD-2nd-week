@@ -19,7 +19,7 @@
 }
 
 .yellow {
-    background-color: yellow;
+    background-color: rgb(255, 202, 28);
 }
 
 .black {
@@ -31,7 +31,7 @@
 }
 
 .orange {
-    background-color: orange;
+    background-color: darkorange;
 }
 
 .color:hover {

@@ -143,6 +143,7 @@ class Canvas {
 
     set thickness(thickness) {
         this.context.lineWidth = thickness;
+        this.context.lineCap = "round";
     }
 
     set isDrawing(isDrawing) {
