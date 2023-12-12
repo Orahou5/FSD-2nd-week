@@ -5,3 +5,71 @@
 #canvas {
     border: 1px solid black;
 }
+
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.black {
+    background-color: black;
+}
+
+.violet {
+    background-color: violet;
+}
+
+.orange {
+    background-color: orange;
+}
+
+#settings {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 20px;
+    align-items: center;
+}
+
+#otherSettings {
+    padding-top: 40px;
+}
+
+#clear {
+    background-color: lightblue;
+    border-radius: 5px;
+    border: none;
+}
+
+#clear:hover {
+    background-color: rgb(56, 110, 161);
+    color: white;
+}
+
+#palette div {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0px 10px;
+}
+
+#palette {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#container {
+    display: flex;
+}

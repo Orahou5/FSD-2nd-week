@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Jour 2</title>
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/main.js" type="module"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/index.js" type="module"></script>
 </head>
 <body>
-    <h1>Jour 2</h1>
-    
-    <canvas id="canvas" height="600" width="800"></canvas>
-    
-    <button>Cliquer ici</button>
+    <div id="container">
+        <canvas id = "canvas" height = "600" width = "800">
+            Désolé, votre navigateur ne prend pas en charge &lt;canvas&gt;.
+        </canvas>
+        <div id = "settings">
+            <div id = "palette">
+                <div class = "black color"></div>
+                <div class = "red color"></div>
+                <div class = "orange color"></div>
+                <div class = "yellow color"></div>
+                <div class = "green color"></div>
+                <div class = "blue color"></div>
+                <div class = "violet color"></div>
+            </div>
+            <div id = "otherSettings">
+                <input type = "range" id = "thickness" min = "1" max = "30" value = "1">
+                <button id = "clear">Effacer</button>
+            </div>
+            
+        </div>
+    </div>
 </body>
 </html>
