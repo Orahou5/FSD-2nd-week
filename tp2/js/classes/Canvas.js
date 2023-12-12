@@ -15,7 +15,6 @@ class Canvas {
         this.#context = this.#canvas.getContext("2d");
         this.#palette = [...document.querySelectorAll(".color").values()];
         this.#thicknessElement = document.querySelector("#thickness");
-        console.log(this);
     }
 
     getColorByElement(element) {
@@ -33,7 +32,6 @@ class Canvas {
 
     createEventListener() {
         document.addEventListener("mousedown", (e) => {
-            console.log("mousedown", this)
             this.isDrawing = true;
 
             if(this.inside) {
@@ -42,18 +40,16 @@ class Canvas {
         })
 
         document.addEventListener("mouseup", (e) => {
-            console.log("mouseup", this)
             this.isDrawing = false;
         })
 
         this.#canvas.addEventListener("mouseout", (e) => {
             this.inside = false;
-            console.log("mouseout", this.inside)
         })
 
         this.#canvas.addEventListener("mouseover", (e) => {
             this.inside = true;
-            console.log("mouseover", this.inside)
+
             if(this.isDrawing !== true) return;
 
             const newPointer = this.getMousePosition(e);
@@ -89,7 +85,6 @@ class Canvas {
     }
     
     drawLine({x, y}) {
-        console.log(this);
         this.context.beginPath();
         this.context.moveTo(this.pointer.x, this.pointer.y);
         this.context.lineTo(x, y);
