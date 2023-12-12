@@ -1,6 +1,9 @@
+
 class Canvas {
     #canvas;
     #context;
+    #palette;
+    #thicknessElement;
     #isDrawing = false;
     #pointer = {
         x: -1,
@@ -11,7 +14,13 @@ class Canvas {
     constructor(container) {
         this.#canvas = document.querySelector(container);
         this.#context = this.#canvas.getContext("2d");
+        this.#palette = [...document.querySelectorAll(".color").values()];
+        this.#thicknessElement = document.querySelector("#thickness");
         console.log(this);
+    }
+
+    getColorByElement(element) {
+        return element?.dataset?.color ?? this.color;
     }
 
     getMousePosition(event) {
@@ -63,6 +72,16 @@ class Canvas {
             this.pointer = newPointer;
         });
 
+        this.palette.forEach((element) => {
+            element.addEventListener("click", (e) => {
+                this.color = this.getColorByElement(e.target);
+            });
+        });
+
+        this.#thicknessElement.addEventListener("change", (e) => {
+            this.thickness = e.target.value;
+        });
+
         return this;
     }
     
@@ -96,6 +115,26 @@ class Canvas {
 
     get inside() {
         return this.#pointer.inside;
+    }
+
+    get palette() {
+        return this.#palette;
+    }
+
+    get color() {
+        return this.context.strokeStyle;
+    }
+
+    set color(color) {
+        this.context.strokeStyle = color;
+    }
+
+    get thickness() {
+        return this.context.lineWidth;
+    }
+
+    set thickness(thickness) {
+        this.context.lineWidth = thickness;
     }
 
     set isDrawing(isDrawing) {
