@@ -61,22 +61,22 @@ export class Pages {
     }
 
     #createPages(totalPages, current) {
-        const liPrevious = this.#createMover("&laquo;", "previous set of pokemons", true, () => {
+        const liPrevious = this.#createMover("&laquo;", "previous set of films", true, () => {
             if(current <= 1) return;
             this.fetcher(current - 1)
         });
       
-        const liNext = this.#createMover("&raquo;", "next set of pokemons", false, () => {
+        const liNext = this.#createMover("&raquo;", "next set of films", false, () => {
             if(current >= totalPages) return;
             this.fetcher(current + 1)
         });
 
-        const liFirst = this.#createMover(`&laquo;&laquo;`, "first set of pokemons", true, () => {
+        const liFirst = this.#createMover(`&laquo;&laquo;`, "first set of films", true, () => {
             if(current <= 1) return;
             this.fetcher(1)
         });
 
-        const liLast = this.#createMover("&raquo;&raquo;", "last set of pokemons", false, () => {
+        const liLast = this.#createMover("&raquo;&raquo;", "last set of films", false, () => {
             if(current >= totalPages) return;
             this.fetcher(totalPages)
         });
