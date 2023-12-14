@@ -1,4 +1,4 @@
-import { Pages } from "./Pagese.js";
+import { Pages } from "./Pages.js";
 import { fetchJson } from "./fetchJson.js";
 
 const filmsList = document.querySelector("#films-list");
