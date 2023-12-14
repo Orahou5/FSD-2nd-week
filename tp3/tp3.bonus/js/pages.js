@@ -1,6 +1,6 @@
 import { fetchPokemons } from "./pokemon.js";
 
-const pages = document.querySelector(".pagination");
+const [pageTop, pageBottom] = [...document.querySelectorAll(".pagination").values()];
 const pageLimit = 5;
 
 function getNumberOfPages(totalPages, current, limit) {
@@ -37,7 +37,7 @@ function createPage(page, current) {
 
     li.addEventListener("click", () => {
         fetchPokemons(page)
-    })
+    });
 
     return li;
 }
@@ -78,15 +78,17 @@ export function createPages(totalPages, current) {
         fetchPokemons(totalPages)
     });
 
+    const pagesElements = getNumberOfPages(totalPages, current, pageLimit).map(page => createPage(page, page === current))
+
+    return [liFirst, liPrevious, ...pagesElements, liNext, liLast];
+}
+
+function refreshAndAppendPages(pages, ...elements) {
     pages.innerHTML = "";
+    pages.append(...elements);
+}
 
-    pages.append(liFirst);
-    pages.append(liPrevious);
-
-    getNumberOfPages(totalPages, current, pageLimit).forEach(page => {
-        pages.append(createPage(page, page === current))
-    })
-
-    pages.append(liNext);
-    pages.append(liLast);
+export function refreshNavs(totalPages, current) {
+    refreshAndAppendPages(pageTop, ...createPages(totalPages, current));
+    refreshAndAppendPages(pageBottom, ...createPages(totalPages, current));
 }

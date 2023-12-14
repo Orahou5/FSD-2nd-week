@@ -13,6 +13,15 @@
 nav {
     display: flex;
     justify-content: center;
+}
+
+#nav-top {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+}
+
+#nav-bottom {
     border-top: 1px solid #eee;
     margin-top: 1em;
     padding-top: 0.5em;

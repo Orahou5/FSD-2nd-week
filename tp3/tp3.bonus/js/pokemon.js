@@ -1,4 +1,4 @@
-import { createPages } from "./pages.js";
+import { refreshNavs } from "./pages.js";
 
 const pokemonsList = document.querySelector("#pokemons")
 
@@ -39,9 +39,9 @@ export function fetchPokemons(page) {
     fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${(page - 1) * 20}&limit=20`).then(response => response.json()).then(async pokemonsTruncated => {
         const totalPages = Math.ceil(+(pokemonsTruncated.count)/20);
 
-        createPages(totalPages, page)
+        refreshNavs(totalPages, page);
 
-        pokemonsList.innerHTML = ""
+        pokemonsList.innerHTML = "";
 
         pokemonsTruncated.results.forEach((pokemonCut) => {
             pokemonsList.append(createPokemonEmplacement(pokemonCut))
