@@ -27,6 +27,12 @@ nav {
     padding-top: 0.5em;
 }
 
+#search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
 .pagination {
     list-style: none;
     margin: 0;
@@ -67,13 +73,15 @@ nav {
 }
 
 .info {
-    display: inline-block;
-    flex-direction: column;
-    align-items: center;
     width: 300px;
     border: solid;
     text-align: center;
-    font-weight: bold;
+}
+
+#films-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .loading {
@@ -84,10 +92,15 @@ nav {
     display: flex;
     flex-wrap: wrap; 
     justify-content: center; 
-}
+} 
 
 #title {
     text-align: center;
+}
+
+.film-title {
+    font-weight: bold;
+    color: rgb(19, 88, 153);
 }
 
 body {
