@@ -1,14 +1,16 @@
+import { Configuration } from "./Configuration.js";
 import { sendSearch } from "./films.js";
 
-const form = document.querySelector("#search-form");
+const main = async () => {
+    const configuration =  await new Configuration().fetchConfiguration();
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-    sendSearch(formData.get("search-bar"));
-})
+    const form = document.querySelector("#search-form");
 
-//fetchPokemons(1)
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        sendSearch(formData.get("search-bar"), configuration);
+    })
+}
 
-//fetchFilms(1)
-
+main();

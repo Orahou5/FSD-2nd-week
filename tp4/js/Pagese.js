@@ -10,12 +10,14 @@ export class Pages {
     #getNumberOfPages(totalPages, current, limit) {
         const middle = Math.ceil(limit/2);
 
+        const limitNew = totalPages < limit ? totalPages : limit;
+
         if(current < middle) {
-            return [...Array(limit).keys()].map(x => x + 1);
+            return [...Array(limitNew).keys()].map(x => x + 1);
         } else if(totalPages - current < middle) {
-            return [...Array(limit).keys()].map(x => x + totalPages - limit + 1);
+            return [...Array(limitNew).keys()].map(x => x + totalPages - limitNew + 1);
         } else {
-            return [...Array(limit).keys()].map(x => x + current - middle + 1);
+            return [...Array(limitNew).keys()].map(x => x + current - middle + 1);
         }
     }
 
@@ -90,9 +92,14 @@ export class Pages {
         pages.append(...elements);
     }
 
+    #backToTop() {
+        window.scrollTo(0, 0);
+    }
+
     refreshNavs(totalPages, current) {
         this.#refreshAndAppendPages(this.pageTop, ...this.#createPages(totalPages, current));
         this.#refreshAndAppendPages(this.pageBottom, ...this.#createPages(totalPages, current));
+        this.#backToTop();
     }
 }
 
