@@ -23,22 +23,13 @@ function createFilm(film) {
     return divFilm;
 }
 
-const fetchFilms = (search, configuration) => (pages) =>  async (currentPage) => {
-    const films = await fetchJson(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&page=${currentPage}&api_key=${configuration.apiKey}`);
-
-    console.log(films);
-    console.log(configuration);
+function createAllFilms(films, configuration) {
+    filmsList.innerHTML = "";
 
     const posterSize = configuration.apiImage.poster_sizes[2];
     const imgUrl = configuration.apiImage.secure_base_url;
 
-    pages.refreshNavs(films.total_pages, films.page);
-
-    filmsList.innerHTML = "";
-
     films.results.forEach(async (film) => {
-        //filmsList.append(createEmplacement(film));
-
         const posterPath = film.poster_path !== null ? 
         `${imgUrl}${posterSize}/${film.poster_path}`:
         "./img/placeHolderFilm.png"
@@ -49,7 +40,14 @@ const fetchFilms = (search, configuration) => (pages) =>  async (currentPage) =>
             description: film.overview,
         })
     })
+}
 
+const fetchFilms = (search, configuration) => (pages) =>  async (currentPage) => {
+    const films = await fetchJson(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&page=${currentPage}&api_key=${configuration.apiKey}`);
+
+    pages.refreshNavs(films.total_pages, films.page);
+
+    createAllFilms(films, configuration);
 }
 
 export async function sendSearch(search, configuration) {
