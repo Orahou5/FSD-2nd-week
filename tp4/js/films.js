@@ -43,7 +43,7 @@ function createAllFilms(films, configuration) {
 }
 
 const fetchFilms = (search, configuration) => (pages) =>  async (currentPage) => {
-    const films = await fetchJson(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&page=${currentPage}&api_key=${configuration.apiKey}`);
+    const films = await fetchJson(configuration.getSearchUrl(search, currentPage));
 
     pages.refreshNavs(films.total_pages, films.page);
 

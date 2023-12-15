@@ -15,11 +15,15 @@ export class Configuration {
         return this;
     }
 
-    get posterSize() {
-        const filtered = this.apiImage.poster_sizes.filter((wSize) => {
-            return (wSize.match(/w(\d+)/i)?.[1] ?? 0) <= this.width;
+    getSearchUrl(search, page) {
+        const params = new URLSearchParams({
+            query: search,
+            include_adult: false,
+            language: "fr-FR",
+            page: page,
+            api_key: this.apiKey,
         });
 
-        Math
+        return `https://api.themoviedb.org/3/search/movie?` + params;
     }
 }
