@@ -25,8 +25,6 @@ document.querySelector("form").addEventListener("submit", async (event) => {
 
     if(!coords) return alert("Adresse introuvable");
 
-    console.log(coords);
-
     showAdress(search);
 
     const cinema = new Cinema(coords);
