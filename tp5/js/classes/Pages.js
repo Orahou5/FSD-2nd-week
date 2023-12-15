@@ -4,7 +4,6 @@ export class Pages {
         this.pageBottom = document.querySelector("#nav-bottom .pagination");
         this.pageLimit = 5;
         this.fetcher = fn;
-        console.log(this.fetcher)
         this.contentOfPages = contentOfPages;
     }
 
