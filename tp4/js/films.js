@@ -52,6 +52,6 @@ const fetchFilms = (search, configuration) => (pages) =>  async (currentPage) =>
 
 export async function sendSearch(search, configuration) {
     const finalFetchFilms = fetchFilms(search, configuration);
-    const pages = new Pages(finalFetchFilms);
+    const pages = new Pages(finalFetchFilms, "films");
     finalFetchFilms(pages) (1);
 }

@@ -1,9 +1,10 @@
 export class Pages {
-    constructor(fn) {
+    constructor(fn, contentOfPages) {
         this.pageTop = document.querySelector("#nav-top .pagination");
         this.pageBottom = document.querySelector("#nav-bottom .pagination");
         this.pageLimit = 5;
         this.fetcher = fn(this);
+        this.contentOfPages = contentOfPages;
     }
 
     #getNumberOfPages(totalPages, current, limit) {
@@ -61,22 +62,22 @@ export class Pages {
     }
 
     #createPages(totalPages, current) {
-        const liPrevious = this.#createMover("&laquo;", "previous set of films", true, () => {
+        const liPrevious = this.#createMover("&laquo;", `previous set of ${this.contentOfPages}`, true, () => {
             if(current <= 1) return;
             this.fetcher(current - 1)
         });
       
-        const liNext = this.#createMover("&raquo;", "next set of films", false, () => {
+        const liNext = this.#createMover("&raquo;", `next set of ${this.contentOfPages}`, false, () => {
             if(current >= totalPages) return;
             this.fetcher(current + 1)
         });
 
-        const liFirst = this.#createMover(`&laquo;&laquo;`, "first set of films", true, () => {
+        const liFirst = this.#createMover(`&laquo;&laquo;`, `first set of ${this.contentOfPages}`, true, () => {
             if(current <= 1) return;
             this.fetcher(1)
         });
 
-        const liLast = this.#createMover("&raquo;&raquo;", "last set of films", false, () => {
+        const liLast = this.#createMover("&raquo;&raquo;", `last set of ${this.contentOfPages}`, false, () => {
             if(current >= totalPages) return;
             this.fetcher(totalPages)
         });
