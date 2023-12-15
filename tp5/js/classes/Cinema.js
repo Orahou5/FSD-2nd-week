@@ -1,4 +1,5 @@
 import { fetchJson } from "../fetchJson.js";
+import { haversine } from "../geo.js";
 import { Pages } from "./Pages.js";
 
 export class Cinema {
@@ -32,7 +33,7 @@ export class Cinema {
     createAllCinemas(cinemas) {
         this.cinemasList.innerHTML = "";
     
-        cinemas.results.forEach(async (cinema) => {
+        cinemas.forEach(async (cinema) => {
             this.createCinema({
                 name: cinema.nom,
                 adresse: cinema.adresse,
@@ -55,11 +56,18 @@ export class Cinema {
     }
 
     async fetchCinema(page) {
-        console.log(this)
         const cinemas = await fetchJson(`https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?${this.params(page)}`);
+
+        if(cinemas === null) return null;
+
+        const sortedCinemas = cinemas.results.toSorted((a,b) => {
+            const distA = haversine(this.coords, a.geolocalisation);
+            const distB = haversine(this.coords, b.geolocalisation);
+            return distA - distB;
+        });
 
         this.pages.refreshNavs(this.totalPages(cinemas.total_count), page);
 
-        this.createAllCinemas(cinemas);
+        this.createAllCinemas(sortedCinemas);
     }
 }
