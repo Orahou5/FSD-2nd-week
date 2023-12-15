@@ -4,9 +4,10 @@ import { Pages } from "./Pages.js";
 export class Cinema {
     pages = null;
 
-    constructor(limit = 20) {
+    constructor(coords, limit = 20) {
         this.pages = new Pages(this.fetchCinema.bind(this), "cinema");
         this.limit = limit;
+        this.coords = coords;
         this.cinemasList = document.querySelector("#cinemas-list");
     }
 
@@ -44,7 +45,8 @@ export class Cinema {
         return new URLSearchParams({
             order_by: "fauteuils",
             limit: this.limit,
-            offset: (page - 1) * this.limit
+            offset: (page - 1) * this.limit,
+            where: `within_distance(geolocalisation, geom'POINT(${this.coords.lon} ${this.coords.lat})', 10km)`
         });
     }
 

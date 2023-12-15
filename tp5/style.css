@@ -84,6 +84,12 @@ nav {
     flex-wrap: wrap;
 }
 
+#geo-available {
+    display: flex;
+    justify-content: center;
+    font-size: 1.25em;
+}
+
 .loading {
     border: none;
 }
