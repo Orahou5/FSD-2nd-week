@@ -1,16 +1,20 @@
-const elements = {
-    adresseP: document.querySelector("#adresse"),
-    villeP: document.querySelector("#ville"),
-}
+import { fetchJson } from "./fetchJson.js";
+
+const adresseInput = document.querySelector("#geo-search");
 
 function isGeolocationAvailable() {
     return "geolocation" in navigator;
 }
 
-export function displayGeolocationAvailability() {
+export function geoInit() {
+    displayGeolocationAvailability();
+    createGeoEvent();
+}
+
+function displayGeolocationAvailability() {
     document.querySelector("#geo-available").innerText = isGeolocationAvailable() ?
-        "Geolocation is available" :
-        "Geolocation IS NOT available";
+        "La géolocalisation est disponible" :
+        "La géolocalisation n'est pas disponible";
 }
 
 export function getCoords() {
@@ -26,25 +30,33 @@ export function getCoords() {
     })
 }
 
-// // createEvent() {
-// //     if(!this.isGeolocationAvailable()) return;
+function createGeoEvent() {
+    if(!isGeolocationAvailable()) return;
 
-// //     this
+    document.querySelector("#geolocaliser").addEventListener("click", async (event) => {
+        event.preventDefault();
+        const coords = await getCoords();
+        const adresse = await fetchAdresse(coords);
+        adresseInput.value = adresse.label;
+    })    
+}
 
-// //     document.querySelector('#fetch').addEventListener('click', (e) => {
-// //         this.geo.getCurrentPosition((position) => {
-// //             const {latitude: lat, longitude: lon} = position.coords
-            
-// //         }, (err) => {
-// //             console.log(err)
-// //         })
-// //     })
-// // }
+async function fetchAdresse({lat, lon}) {
+    const adresse = await fetchJson(`https://api-adresse.data.gouv.fr/reverse/?lat=${lat}&lon=${lon}`)
 
-// fetchAdresse(lat, lon) {
-//     fetch(`https://api-adresse.data.gouv.fr/reverse/?lat=${lat}&lon=${lon}`).then(response => response.json()).then(adresse => {
-//         const adresseObjs = adresse.features.map((x) => x.properties)
+    return adresse.features[0].properties;
+}
 
-//         this.adresseP.innerText = adresseObjs.map((x) => x.label).join("\nOU\n")
-//     })
-// }
+export async function fetchCoords(adresse) {
+    try {
+        const coords = await fetchJson(`https://api-adresse.data.gouv.fr/search/?q=${adresse}`)
+
+        const [lon, lat] = coords.features[0].geometry.coordinates;
+
+        return {lon, lat};
+    } catch (error) {
+        console.error(error)
+        return undefined;
+    }
+    
+}

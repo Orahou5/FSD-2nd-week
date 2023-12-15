@@ -88,6 +88,20 @@ nav {
     display: flex;
     justify-content: center;
     font-size: 1.25em;
+    font-style: italic;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+#adresse-p {
+    display: flex;
+    justify-content: center;
+    font-size: 1em;
+    white-space: pre;
 }
 
 .loading {
