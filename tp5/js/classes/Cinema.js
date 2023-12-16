@@ -79,8 +79,6 @@ export class Cinema {
 
         const cinemas = await this.fetchAndAddCinemas(page);
 
-        console.log(cinemas)
-
         const promises = [];
         const totalPages = this.totalPages(cinemas.total_count);
 
