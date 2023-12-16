@@ -17,7 +17,7 @@ function displayGeolocationAvailability() {
         "La géolocalisation n'est pas disponible";
 }
 
-export function getCoords() {
+function getCoords() {
     return new Promise((resolve, reject) => {
         if(!isGeolocationAvailable()) reject("Geolocation is not available")
 
