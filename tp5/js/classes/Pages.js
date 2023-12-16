@@ -1,7 +1,9 @@
 export class Pages {
     constructor(fn, contentOfPages) {
         this.pageTop = document.querySelector("#nav-top .pagination");
+
         this.pageBottom = document.querySelector("#nav-bottom .pagination");
+
         this.pageLimit = 5;
         this.fetcher = fn;
         this.contentOfPages = contentOfPages;
@@ -38,10 +40,13 @@ export class Pages {
         span.after(page)
 
         const fn = () => {
+            if(current === true) return;
             this.fetcher(page)
         }
 
         li.addEventListener("click", fn)
+
+        li.classList.add("button-black-white");
 
         return li;
     }
@@ -57,6 +62,8 @@ export class Pages {
         `
 
         liPrevious.addEventListener("click", fn)
+
+        liPrevious.classList.add("button-black-white");
 
         return liPrevious;
     }
